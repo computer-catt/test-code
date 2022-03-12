@@ -61,7 +61,7 @@ namespace Servers.dat_Maker
 						}
 
 						Console.Write("\n");
-						TagCompound child = servers.Value.Add(10);
+						TagCompound child = (TagCompound)servers.Value.Add(TagType.Compound);
 						child.Value.Add("ip", ipInput);
 						child.Value.Add("name", nameInput);
 						Console.ForegroundColor = ConsoleColor.Green;
@@ -118,7 +118,9 @@ namespace Servers.dat_Maker
 								Console.WriteLine("\n");
 							}
 						}
+						
 					}
+					break;
 				case "C":
 					{
 						document.Save("servers.dat");
@@ -127,6 +129,7 @@ namespace Servers.dat_Maker
 						Console.WriteLine("Done creating the servers.dat!\n");
 						Console.ForegroundColor = ConsoleColor.White;
 					}
+					break;
 				case "L":
 					{
 						Console.WriteLine();
@@ -155,12 +158,14 @@ namespace Servers.dat_Maker
 						Console.WriteLine("---------------");
 						Console.WriteLine();
 					}
+					break;
 				default:
 					Console.Clear();
 					Console.ForegroundColor = ConsoleColor.Red;
 					Console.WriteLine("Error: Expected A/R. Got \"" + text + "\"");
 					Console.ForegroundColor = ConsoleColor.White;
 					Console.WriteLine("\n");
+					break;
 			}
 		}
 	}
