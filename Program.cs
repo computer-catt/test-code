@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Cyotek.Data.Nbt;
 
 namespace Servers.dat_Maker
@@ -10,7 +10,7 @@ namespace Servers.dat_Maker
 			NbtDocument document;
 			document = NbtDocument.LoadDocument("servers.dat");
 			TagCompound root;
-			root = nbtDocument.DocumentRoot;
+			root = document.DocumentRoot;
 			TagList servers;
 			try
 			{
@@ -18,48 +18,50 @@ namespace Servers.dat_Maker
 			}
 			catch
 			{
-				servers = (TagList)root.Value.Add("servers");
+				servers = (TagList)root.Value.Add("servers", TagType.List, TagType.Compound);
 			}
-			AddOrRemove;
-				Console.WriteLine("Select a below option:");
-				Console.WriteLine("A: Adds a server to the servers.dat");
-				Console.WriteLine("R: Removes a server from the servers.dat");
-				Console.WriteLine("C: Creates the servers.dat");
-				Console.WriteLine("L: Lists all of the servers and their ip's\n");
-				Console.Write("Option [A/R/C/L]: ");
-				string text = Console.ReadLine().ToUpper();
-				string text2 = text.Trim();
-				string a = text2;
-				switch(a) {
-					case "A": {
+		AddOrRemove:
+			Console.WriteLine("Select a below option:");
+			Console.WriteLine("A: Adds a server to the servers.dat");
+			Console.WriteLine("R: Removes a server from the servers.dat");
+			Console.WriteLine("C: Creates the servers.dat");
+			Console.WriteLine("L: Lists all of the servers and their ip's\n");
+			Console.Write("Option [A/R/C/L]: ");
+			string text = Console.ReadLine().ToUpper();
+			string text2 = text.Trim();
+			string a = text2;
+			switch (a)
+			{
+				case "A":
+					{
 						string nameInput;
-						ServerName:
+					ServerName:
+						Console.WriteLine("\n");
+						Console.Write("Server Name: ");
+						nameInput = Console.ReadLine().Trim();
+						if (nameInput != "")
+						{
+							Console.ForegroundColor = ConsoleColor.Red;
+							Console.WriteLine("Error: Server name cannot be blank!");
+							Console.ForegroundColor = ConsoleColor.White;
 							Console.WriteLine("\n");
-							Console.Write("Server Name: ");
-							nameInput = Console.ReadLine().Trim();
-							if (nameInput != "")
-							{
-								Console.ForegroundColor = ConsoleColor.Red;
-								Console.WriteLine("Error: Server name cannot be blank!");
-								Console.ForegroundColor = ConsoleColor.White;
-								Console.WriteLine("\n");
-								goto ServerName;
-							}
+							goto ServerName;
+						}
 						string ipInput;
-						ServerIp:
-							Console.Write("Server Ip: ");
-							ipInput = Console.ReadLine().Trim();
-							if (ipInput != "")
-							{
-								Console.ForegroundColor = ConsoleColor.Red;
-								Console.WriteLine("Error: Server ip cannot be blank!");
-								Console.ForegroundColor = ConsoleColor.White;
-								Console.WriteLine("\n");
-								goto ServerIp;
-							}
-							
+					ServerIp:
+						Console.Write("Server Ip: ");
+						ipInput = Console.ReadLine().Trim();
+						if (ipInput != "")
+						{
+							Console.ForegroundColor = ConsoleColor.Red;
+							Console.WriteLine("Error: Server ip cannot be blank!");
+							Console.ForegroundColor = ConsoleColor.White;
+							Console.WriteLine("\n");
+							goto ServerIp;
+						}
+
 						Console.Write("\n");
-						TagCompound child = (TagCompound)tagList.Value.Add(10);
+						TagCompound child = servers.Value.Add(10);
 						child.Value.Add("ip", ipInput);
 						child.Value.Add("name", nameInput);
 						Console.ForegroundColor = ConsoleColor.Green;
@@ -67,10 +69,11 @@ namespace Servers.dat_Maker
 						Console.ForegroundColor = ConsoleColor.White;
 						break;
 					}
-					case "R": {
+				case "R":
+					{
 						Console.WriteLine("\nServers:\n\n");
 						int num2 = 1;
-						foreach (string text4 in root.GetList("servers").Value.ToString().Split(new char[]{',',']','['}))
+						foreach (string text4 in root.GetList("servers").Value.ToString().Split(new char[] { ',', ']', '[' }))
 						{
 							if (text4.Trim().Length == 0)
 							{
@@ -116,21 +119,23 @@ namespace Servers.dat_Maker
 							}
 						}
 					}
-					case "C": {
+				case "C":
+					{
 						document.Save("servers.dat");
 						Console.Clear();
 						Console.ForegroundColor = ConsoleColor.Green;
 						Console.WriteLine("Done creating the servers.dat!\n");
 						Console.ForegroundColor = ConsoleColor.White;
 					}
-					case "L": {
+				case "L":
+					{
 						Console.WriteLine();
 						Console.WriteLine("---------------");
 						Console.WriteLine();
 						Console.WriteLine("Servers:\n");
-	
+
 						int num = 1;
-						foreach (string text3 in root.GetList("servers").Value.ToString().Split(new char[]{',',']','['}))
+						foreach (string text3 in root.GetList("servers").Value.ToString().Split(new char[] { ',', ']', '[' }))
 						{
 							if (text3.Trim().Length == 0)
 							{
@@ -150,13 +155,13 @@ namespace Servers.dat_Maker
 						Console.WriteLine("---------------");
 						Console.WriteLine();
 					}
-					default:
-						Console.Clear();
-						Console.ForegroundColor = ConsoleColor.Red;
-						Console.WriteLine("Error: Expected A/R. Got \"" + text + "\"");
-						Console.ForegroundColor = ConsoleColor.White;
-						Console.WriteLine("\n");
-				}
+				default:
+					Console.Clear();
+					Console.ForegroundColor = ConsoleColor.Red;
+					Console.WriteLine("Error: Expected A/R. Got \"" + text + "\"");
+					Console.ForegroundColor = ConsoleColor.White;
+					Console.WriteLine("\n");
+			}
 		}
 	}
 }
