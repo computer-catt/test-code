@@ -27,3 +27,13 @@
 #vc-spotify-player + [class^="container"] {
     background: transparent;
 }
+
+/* home icon */
+.wrapper_d281dd[data-list-item-id="guildsnav___home"] .childWrapper__01b9c {
+    background: url("https://cdn.discordapp.com/attachments/1112414973549887569/1220958440986251264/d48999e90ec69da874a2aca061a97928.png?ex=6610d528&is=65fe6028&hm=2ce76ec42c20ca54b63dbba382591f273a69609fd0b90f2ca19ca7ad0751d35f&") no-repeat center !important;
+    background-size: cover !important;
+}
+.wrapper_d281dd[data-list-item-id="guildsnav___home"] .childWrapper__01b9c svg {
+    display: none;
+}
+.wordmark__0d178{pointer-events:unset;padding:0}.wordmark__0d178>svg{display:none}.wordmark__0d178::after{position:absolute;top:4px;padding:0px 9px 3px;font-size:16px;letter-spacing:.4px;white-space:nowrap;font-family:var(--font-headline);content:"Modified Discord"}:root:has(#vencord-css-core) .wordmark__0d178::after{content:"SILLY CAT CORD!!"}:root:has(#vcd-css-core) .wordmark__0d178::after{content:"Vesktop"}:root:has(link[href^=replugged]) .wordmark__0d178::after{content:"Replugged"}:root:has(bd-body) .wordmark__0d178::after{content:"BetterDiscord"}.wordmark__0d178::after :root:has(script[src^="chrome-extension://cpojbkbhfkkljmlojagocnbmiaagkhkn"]){content:"Shelter"}
