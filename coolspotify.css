@@ -1,0 +1,29 @@
+/* spotify thing */
+#vc-spotify-player {
+  --blur-amount: 8px; 
+  --brightness: 50%;
+
+  background: transparent !important;
+  position: relative;
+}
+#vc-spotify-player::before,
+#vc-spotify-player::after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  height: 200%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+#vc-spotify-player::after {
+  backdrop-filter: blur(var(--blur-amount)) brightness(var(--brightness));
+}
+#vc-spotify-player::before {
+  background: var(--vc-spotify-track-image);
+  background-size: 100% 100%; /* replace with "cover" in case your blur is small enough to see that it's stretched */
+}
+
+#vc-spotify-player + [class^="container"] {
+    background: transparent;
+}
